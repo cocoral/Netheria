@@ -50,7 +50,10 @@ const HardwareTargets = ({ hardwareTargets, form, setDetailsCounter }) => {
       form.getFieldValue("hardware_targets")[fieldName]?.instance;
     const provider =
       form.getFieldValue("hardware_targets")[fieldName]?.provider;
-    return hardwareMap[provider]?.find((item) => item.instance === instance);
+
+    return hardwareTargets?.find(
+      (item) => item.instance === instance && item.provider === provider,
+    );
   };
 
   return (

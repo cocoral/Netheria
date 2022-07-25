@@ -10,27 +10,27 @@ const serverAxios = axios.create({
 });
 
 // Requests
-function getHardware() {
+const getHardware = () => {
   return serverAxios({
     url: "/hardware",
     method: "GET",
   });
-}
+};
 
-function saveBenchmark(data) {
+const saveBenchmark = (data) => {
   return serverAxios({
     url: "/benchmark",
     method: "POST",
     data,
   });
-}
+};
 
-function saveAccelerate(data) {
+const saveAccelerate = (data) => {
   return serverAxios({
     url: "/accelerate",
     method: "POST",
     data,
   });
-}
+};
 
 export { getHardware, saveBenchmark, saveAccelerate };

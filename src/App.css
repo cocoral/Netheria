@@ -1,5 +1,12 @@
 @import "~antd/dist/antd.css";
 
+.logo {
+  background-image: url("https://www.datocms-assets.com/45680/1619189186-octomllogolight.svg");
+  height: 27px;
+  width: 23px;
+  margin: 20px auto 30px;
+}
+
 h1.title-1,
 h2.title-2,
 h3.title-3 {

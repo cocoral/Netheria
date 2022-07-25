@@ -62,8 +62,8 @@ const BenchmarkCard = ({ hasBenchmark, setHasBenchmark }) => {
               onChange={onEngineChange}
               allowClear
             >
-              <Option value="onnx">ONNX</Option>
-              <Option value="tvm">TVM</Option>
+              <Option value="ONNX">ONNX</Option>
+              <Option value="TVM">TVM</Option>
             </Select>
           </Form.Item>
           <Row gutter={16}>

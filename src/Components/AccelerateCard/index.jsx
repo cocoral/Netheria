@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Typography, Card, Form, InputNumber, Select, Checkbox } from "antd";
 import { DownOutlined, UpOutlined } from "@ant-design/icons";
 const { Paragraph } = Typography;
 const { Option } = Select;
 
 const AccelerateCard = ({ hasAccelerate, setHasAccelerate }) => {
+  const [engine, setEngine] = useState(null);
   const onCheckBenchMark = (e) => {
     setHasAccelerate(e.target.checked);
   };
 
-  const onEngineChange = () => {};
+  const onEngineChange = (value) => {
+    setEngine(value);
+  };
 
   return (
     <Card>
@@ -51,22 +54,24 @@ const AccelerateCard = ({ hasAccelerate, setHasAccelerate }) => {
               onChange={onEngineChange}
               allowClear
             >
-              <Option value="onnx">ONNX</Option>
-              <Option value="tvm">TVM</Option>
+              <Option value="ONNX">ONNX</Option>
+              <Option value="TVM">TVM</Option>
             </Select>
           </Form.Item>
-
-          <Form.Item
-            name="accelerate_kernel_trials"
-            label="Kernel Trials"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <InputNumber min={1} max={2000} />
-          </Form.Item>
+          {engine === "TVM" && (
+            <Form.Item
+              name="accelerate_kernel_trials"
+              label="Kernel Trials"
+              dependencies={["accelerate_engine"]}
+              rules={[
+                {
+                  required: true,
+                },
+              ]}
+            >
+              <InputNumber min={1} max={2000} />
+            </Form.Item>
+          )}
         </>
       )}
     </Card>
