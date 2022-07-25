@@ -1,6 +1,7 @@
 import { HomeFilled, BarChartOutlined } from "@ant-design/icons";
-import { Typography, Layout, Menu, Card, Space, Row, Col } from "antd";
-import React from "react";
+import { Typography, Layout, Menu, Space } from "antd";
+import OctomizePage from "Containers/OctomizePage";
+
 const { Content, Sider } = Layout;
 
 function getItem(key, icon) {
@@ -50,17 +51,12 @@ const BasicLayout = () => {
               }}
             >
               <div>
-                <Title style={{ marginBottom: 0 }}>Shufflenet-v2.onnx</Title>
+                <Title style={{ marginBottom: 0 }} className="title-1">
+                  Shufflenet-v2.onnx
+                </Title>
                 <Paragraph>Created three days ago by Mike Johnson</Paragraph>
               </div>
-              <Row gutter={[16, 16]}>
-                <Col xl={18} md={16} xs={24}>
-                  <Card>Bill is a cat.</Card>
-                </Col>
-                <Col xl={6} md={8} xs={24}>
-                  <Card>Run</Card>
-                </Col>
-              </Row>
+              <OctomizePage />
             </Space>
           </div>
         </Content>
