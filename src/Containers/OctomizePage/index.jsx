@@ -55,7 +55,7 @@ const OctomizePage = () => {
       console.error("no hardware target selected");
     } else {
       // Formate the form into correct shape
-      // Need to get VCPU and memory from hardwareTargets
+      // Get VCPU and memory from hardwareTargets
       const hardwareDetails = hardware_targets?.map((hardware) => ({
         ...hardware,
         ...hardwareTargets.find(
