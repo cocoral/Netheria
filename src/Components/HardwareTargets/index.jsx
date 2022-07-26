@@ -169,7 +169,12 @@ const HardwareTargets = ({ hardwareTargets, form, setDetailsCounter }) => {
               </Space>
             ))}
             <Form.Item>
-              <Button type="dashed" onClick={add} block icon={<PlusOutlined />}>
+              <Button
+                type="dashed"
+                onClick={() => add()}
+                block
+                icon={<PlusOutlined />}
+              >
                 Add a hardware target
               </Button>
             </Form.Item>
