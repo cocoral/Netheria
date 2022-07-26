@@ -41,6 +41,7 @@ const OctomizePage = () => {
   }, []);
 
   const onFinish = async (values) => {
+    console.log("Received values", values);
     const {
       benchmark_engine,
       benchmark_num_trials,
@@ -65,27 +66,30 @@ const OctomizePage = () => {
         ),
       }));
 
-      const benchmarkData = { hardware: hardwareDetails };
-      if (hasBenchmark) {
-        benchmarkData.engine = benchmark_engine;
-        benchmarkData.num_trials = benchmark_num_trials;
-        benchmarkData.runs_per_trial = benchmark_runs_per_trial;
-      }
-
-      const accelerateData = { hardware: hardwareDetails };
-      if (hasAccelerate) {
-        if (accelerate_engine === "TVM") {
-          accelerateData.engine = {
-            [accelerate_engine]: { kernel_trials: accelerate_kernel_trials },
-          };
-        } else {
-          accelerateData.engine = accelerate_engine;
-        }
-      }
-
       try {
-        await saveBenchmark(benchmarkData);
-        await saveAccelerate(accelerateData);
+        hardwareDetails.forEach(async (hardware) => {
+          if (hasBenchmark) {
+            const benchmarkData = { hardware };
+            benchmarkData.engine = benchmark_engine;
+            benchmarkData.num_trials = benchmark_num_trials;
+            benchmarkData.runs_per_trial = benchmark_runs_per_trial;
+            await saveBenchmark(benchmarkData);
+          }
+
+          if (hasAccelerate) {
+            const accelerateData = { hardware };
+            if (accelerate_engine === "TVM") {
+              accelerateData.engine = {
+                [accelerate_engine]: {
+                  kernel_trials: accelerate_kernel_trials,
+                },
+              };
+            } else {
+              accelerateData.engine = accelerate_engine;
+            }
+            await saveAccelerate(accelerateData);
+          }
+        });
         notification["success"]({
           message: "Congrats! ",
           description: "Your task is successfully added to the queue.",
@@ -142,6 +146,7 @@ const OctomizePage = () => {
             form={form}
             detailsCounter={detailsCounter}
             hardwareTargets={hardwareTargets}
+            hasTask={hasBenchmark || hasAccelerate}
           />
         </Col>
       </Row>

@@ -21,13 +21,14 @@ const HardwareTargets = ({ hardwareTargets, form, setDetailsCounter }) => {
 
   const selectedHardwares = form
     ?.getFieldValue("hardware_targets")
-    ?.filter((hardware) => hardware.provider && hardware.instance);
+    ?.filter((hardware) => hardware?.provider && hardware?.instance);
 
   hardwareTargets.forEach((target) => {
     // Skip if already selected
     const shouldSkip = selectedHardwares?.find(
       (item) =>
-        item.provider === target.provider && item.instance === target.instance,
+        item?.provider === target?.provider &&
+        item?.instance === target?.instance,
     );
     if (shouldSkip) return;
     if (hardwareMap[target.provider]) {
@@ -168,12 +169,7 @@ const HardwareTargets = ({ hardwareTargets, form, setDetailsCounter }) => {
               </Space>
             ))}
             <Form.Item>
-              <Button
-                type="dashed"
-                onClick={() => add()}
-                block
-                icon={<PlusOutlined />}
-              >
+              <Button type="dashed" onClick={add} block icon={<PlusOutlined />}>
                 Add a hardware target
               </Button>
             </Form.Item>

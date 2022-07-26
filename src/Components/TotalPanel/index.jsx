@@ -2,16 +2,22 @@ import { Card, Button, Row, Col, Typography } from "antd";
 
 const { Paragraph, Title } = Typography;
 
-function TotalPanel({ onSubmit, form, detailsCounter, hardwareTargets = [] }) {
+function TotalPanel({
+  onSubmit,
+  form,
+  detailsCounter,
+  hardwareTargets = [],
+  hasTask,
+}) {
   const selectedTargets = form
     ?.getFieldValue("hardware_targets")
-    ?.filter((hardware) => hardware.provider && hardware.instance)
+    ?.filter((hardware) => hardware?.provider && hardware?.instance)
     ?.map((hardware) => ({
       ...hardware,
-      ...hardwareTargets.find(
+      ...hardwareTargets?.find(
         (item) =>
-          item.provider === hardware.provider &&
-          item.instance === hardware.instance,
+          item?.provider === hardware?.provider &&
+          item?.instance === hardware?.instance,
       ),
     }));
 
@@ -36,7 +42,13 @@ function TotalPanel({ onSubmit, form, detailsCounter, hardwareTargets = [] }) {
           </Col>
         </Row>
       ))}
-      <Button type="primary" block onClick={onSubmit} size="large">
+      <Button
+        type="primary"
+        block
+        onClick={onSubmit}
+        size="large"
+        disabled={!selectedTargets?.length || !hasTask}
+      >
         Octomize
       </Button>
     </Card>
